@@ -24,16 +24,31 @@ brokerOptions="-Scron.directory=/etc/flux/system/cron.d \
 # This should be added to keep running as a service
 #  -Sbroker.rc2_none \
 
-# Derive hostname (this is a hack to get the one defined by the docker-compose network)
-address=$(echo $( nslookup "$( hostname -i )" | head -n 1 ))
-parts=(${address//=/ })
-hostName=${parts[2]}
-thisHost=(${hostName//./ })
-thisHost=${thisHost[0]}
+# 1. Get the container's IP address
+CONTAINER_IP=$(hostname -i | awk '{print $1}')
+
+# 2. Perform reverse DNS and explicitly extract the string after "name ="
+FULL_HOSTNAME=$(nslookup $CONTAINER_IP | awk '/name =/ {print $4}')
+
+# 3. Strip the trailing network domain to get just the node name (e.g., replicas-node-1)
+thisHost=$(echo $FULL_HOSTNAME | cut -d'.' -f1)
+
+# 4. Provide a safe fallback in case the DNS lookup comes up empty
+if [ -z "$thisHost" ]; then
+    echo "DNS lookup failed, falling back to default."
+    thisHost="replicas-node-1"
+fi
+
 echo $thisHost
 
-# Export this hostname
+# Export this hostname to coincide with the name provided by Docker
 export FLUX_FAKE_HOSTNAME=$thisHost
+
+# Physically change the container's kernel hostname
+sudo hostname $thisHost
+
+# Update the static hostname file
+echo $thisHost | sudo tee /etc/hostname > /dev/null
 
 cd ${workdir}
 printf "\n👋 Hello, I'm ${thisHost}\n"

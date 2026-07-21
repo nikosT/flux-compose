@@ -14,8 +14,9 @@ noverify = true
 [bootstrap]
 curve_cert = "/mnt/curve/curve.cert"
 default_port = 8050
-default_bind = "tcp://eth0:%%p"
-default_connect = "tcp://%%h:%%p"
+# CHANGED: Replaced %%p and %%h with %p and %h
+default_bind = "tcp://eth0:%p"
+default_connect = "tcp://%h:%p"
 # docker-compose starts counting at 1, what a monster
 hosts = [
 	{ host="replicas-node-[1-4]"},
