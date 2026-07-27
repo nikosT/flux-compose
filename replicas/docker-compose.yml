@@ -18,10 +18,6 @@ x-shared-environment: &shared-environment
   workdir: /home/fluxuser
   <<: *workers
 
-x-shared-volumes: &shared-volumes
-  - ./flux/imp.toml:/etc/flux/imp/conf.d/imp.toml
-  - ./flux/broker.toml:/etc/flux/config/broker.toml
-
 services:
   rabbit:
     restart: always
@@ -53,7 +49,6 @@ services:
     networks:
       - rabbitmq
     environment: *shared-environment
-    volumes: *shared-volumes
     deploy:
       <<: *workers
 
