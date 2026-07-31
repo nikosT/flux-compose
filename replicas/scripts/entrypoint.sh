@@ -42,6 +42,11 @@ export FLUX_FAKE_HOSTNAME=$thisHost
 sudo hostname "$thisHost"
 
 # Update the static hostname file
+# sudo sed "\$s/[[:space:]][^[:space:]]*$/ $thisHost/" /etc/hosts \
+#   | sudo tee /etc/hosts.tmp >/dev/null
+
+# sudo cat /etc/hosts.tmp | sudo tee /etc/hosts >/dev/null
+# sudo rm -f /etc/hosts.tmp
 printf '%s\n' "$thisHost" | sudo tee /etc/hostname > /dev/null
 
 # --- DYNAMIC RUNTIME CONFIGURATION ---
@@ -62,6 +67,7 @@ allow-root-owner = true
 [resource]
 path = "/etc/flux/system/R"
 noverify = true
+scheduling = "/etc/flux/system/graph.json"
 
 [bootstrap]
 curve_cert = "/mnt/curve/curve.cert"

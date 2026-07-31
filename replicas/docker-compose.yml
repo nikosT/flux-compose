@@ -45,7 +45,7 @@ services:
     # Disable AppArmor to allow kernel hostname modifications
     security_opt:
       - apparmor:unconfined
-      
+
     networks:
       - rabbitmq
     environment: *shared-environment

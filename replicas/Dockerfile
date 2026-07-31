@@ -23,9 +23,13 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install \
 
 # These are the STATE_DIR, system, and resources directories
 ENV STATE_DIR=/var/lib/flux
+COPY ./scripts/jgf_gen.py /home/fluxuser/
 RUN mkdir -p ${STATE_DIR} /etc/flux/system /etc/flux/system/cron.d /etc/flux/config /etc/flux/imp/conf.d /run/flux && \
     mkdir -p /mnt/curve && \
     flux keygen /mnt/curve/curve.cert && \
+    # Important: "basic" is the directory name here
+    flux R encode --hosts="replicas-node-[1-${workers}]" -c "0-13" > /etc/flux/system/R && \
+    python3 /home/fluxuser/jgf_gen.py --start-node=1 --nnodes="${workers}" --prefix="replicas-node-" --set "socket=2" --set "core=7" -o /etc/flux/system/graph.json && \
     chown -R fluxuser:fluxuser /run/flux ${STATE_DIR} /mnt/curve/curve.cert /etc/flux ${workdir}
 
 COPY ./flux/imp.toml /etc/flux/imp/conf.d/imp.toml
