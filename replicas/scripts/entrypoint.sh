@@ -24,16 +24,55 @@ brokerOptions="-Scron.directory=/etc/flux/system/cron.d \
 # This should be added to keep running as a service
 #  -Sbroker.rc2_none \
 
-# Derive hostname (this is a hack to get the one defined by the docker-compose network)
-address=$(echo $( nslookup "$( hostname -i )" | head -n 1 ))
-parts=(${address//=/ })
-hostName=${parts[2]}
-thisHost=(${hostName//./ })
-thisHost=${thisHost[0]}
+# Get the container's IP address
+CONTAINER_IP=$(hostname -i | awk '{print $1}')
+
+# Perform reverse DNS and explicitly extract the string after "name ="
+FULL_HOSTNAME=$(nslookup $CONTAINER_IP | awk '/name =/ {print $4}')
+
+# Strip the trailing network domain to get just the node name (e.g., replicas-node-1)
+thisHost=$(echo $FULL_HOSTNAME | cut -d'.' -f1)
+
 echo $thisHost
 
-# Export this hostname
+# Export this hostname to coincide with the name provided by Docker
 export FLUX_FAKE_HOSTNAME=$thisHost
+
+# Physically change the container's kernel hostname
+sudo hostname "$thisHost"
+
+# Update the static hostname file
+printf '%s\n' "$thisHost" | sudo tee /etc/hostname > /dev/null
+
+# --- DYNAMIC RUNTIME CONFIGURATION ---
+printf "\n⚙️ Generating runtime configurations for ${replicas} workers...\n"
+
+# 1. Generate resource definition (R) dynamically using the runtime $replicas env var
+sudo flux R encode --hosts="replicas-node-[1-${replicas}]" | sudo tee /etc/flux/system/R > /dev/null
+
+# 2. Generate broker.toml directly without volumes or template files
+sudo tee /etc/flux/config/broker.toml > /dev/null <<EOF
+[exec]
+imp = "/usr/libexec/flux/flux-imp"
+
+[access]
+allow-guest-user = true
+allow-root-owner = true
+
+[resource]
+path = "/etc/flux/system/R"
+noverify = true
+
+[bootstrap]
+curve_cert = "/mnt/curve/curve.cert"
+default_port = 8050
+default_bind = "tcp://eth0:%p"
+default_connect = "tcp://%h:%p"
+hosts = [
+	{ host="replicas-node-[1-${replicas}]"},
+]
+EOF
+# -----------------------------------
 
 cd ${workdir}
 printf "\n👋 Hello, I'm ${thisHost}\n"
