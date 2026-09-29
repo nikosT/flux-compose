@@ -36,6 +36,12 @@ services:
     # Will generate replicas-node-1, replicas-node-2, .. replicas-node-N.
     build:
       context: ./
+      dockerfile: Dockerfile
+
+      additional_contexts:
+        custom_flux_core: ${FLUX_CORE_PATH}
+        custom_flux_sched: ${FLUX_SCHED_PATH}
+
       args: *shared-build-args
       
     # Grant permissions to change the hostname

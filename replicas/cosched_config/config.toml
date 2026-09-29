@@ -1,0 +1,13 @@
+[cosched]
+allowed = true
+resource_type = "socket"
+n_way = 4
+waste_threshold = 0.0
+
+[resource]
+scheduling = "/home/fluxuser/simple-socket.jgf"
+noverify = true
+
+[[resource.config]]
+hosts = "node0"
+cores = "0-7"
