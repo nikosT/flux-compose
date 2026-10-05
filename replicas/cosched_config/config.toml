@@ -1,13 +1,13 @@
-[cosched]
+[coscheduling-cpu]
 allowed = true
-resource_type = "socket"
+resource_type = "node"
 n_way = 4
 waste_threshold = 0.0
 
 [resource]
-scheduling = "/home/fluxuser/simple-socket.jgf"
+scheduling = "/home/fluxuser/cluster.jgf"
 noverify = true
 
 [[resource.config]]
-hosts = "node0"
-cores = "0-7"
+hosts = "replicas-node-[1-4]"
+cores = "0-3"

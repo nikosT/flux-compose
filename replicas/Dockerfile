@@ -1,6 +1,7 @@
 ARG flux_sched_version=jammy
 FROM fluxrm/flux-sched:${flux_sched_version} AS builder
 ARG replicas=3
+ARG build_jobs=6
 ENV workers=${replicas}
 USER root
 
@@ -37,7 +38,7 @@ RUN cd /src/flux-core && \
         --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var && \
-    make -j"$(nproc)" && \
+    make -j"${build_jobs}" && \
     make install && \
     ldconfig
 
@@ -53,7 +54,7 @@ RUN cmake \
         -DFLUX_SCHED_VER=0.55.0 \
         -DCMAKE_C_COMPILER=/usr/bin/gcc-12 \
         -DCMAKE_CXX_COMPILER=/usr/bin/g++-12 && \
-    cmake --build /tmp/flux-sched-build --parallel && \
+    cmake --build /tmp/flux-sched-build --parallel "${build_jobs}" && \
     cmake --install /tmp/flux-sched-build && \
     ldconfig
 
@@ -78,5 +79,6 @@ COPY ./scripts/entrypoint.sh ./scripts/job.py ./
 COPY --chown=fluxuser:fluxuser \
     ./cosched_config/config.toml \
     ./cosched_config/simple-socket.jgf \
+    ./cosched_config/cluster.jgf \
     ./
 ENTRYPOINT /bin/bash /home/fluxuser/entrypoint.sh

@@ -48,7 +48,7 @@ printf '%s\n' "$thisHost" | sudo tee /etc/hostname > /dev/null
 printf "\n⚙️ Generating runtime configurations for ${replicas} workers...\n"
 
 # 1. Generate resource definition (R) dynamically using the runtime $replicas env var
-sudo flux R encode --hosts="replicas-node-[1-${replicas}]" | sudo tee /etc/flux/system/R > /dev/null
+sudo flux R encode --hosts="replicas-node-[1-${replicas}]" --cores="0-3" | sudo tee /etc/flux/system/R > /dev/null
 
 # 2. Generate broker.toml directly without volumes or template files
 sudo tee /etc/flux/config/broker.toml > /dev/null <<EOF
@@ -80,7 +80,7 @@ printf "The main host is ${mainHost}\n\n"
 printf "🔍️ Here is what I found in the working directory, ${workdir}\n"
 ls ${workdir}
 
-# --cores=IDS Assign cores with IDS to each rank in R, so we  assign 1-N to 0
+# Each broker rank advertises four cores with local IDs 0-3.
 printf "\n📦 Resources\n"
 sudo cat /etc/flux/system/R
 
