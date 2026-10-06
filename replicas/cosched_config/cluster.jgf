@@ -1,0 +1,567 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "cluster0",
+        "metadata": {
+          "type": "cluster",
+          "uuid": "00000000-0000-0000-0000-000000000000",
+          "basename": "cluster",
+          "name": "cluster0",
+          "id": 0,
+          "uniq_id": 0,
+          "rank": -1,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0"
+          }
+        }
+      },
+      {
+        "id": "node0",
+        "metadata": {
+          "type": "node",
+          "uuid": "00000000-0000-0000-0000-000000000001",
+          "basename": "node",
+          "name": "replicas-node-1",
+          "id": 0,
+          "uniq_id": 1,
+          "rank": 0,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-1"
+          }
+        }
+      },
+      {
+        "id": "node0_core0",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000003",
+          "basename": "core",
+          "name": "core0",
+          "id": 0,
+          "uniq_id": 3,
+          "rank": 0,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-1/core0"
+          }
+        }
+      },
+      {
+        "id": "node0_core1",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000004",
+          "basename": "core",
+          "name": "core1",
+          "id": 1,
+          "uniq_id": 4,
+          "rank": 0,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-1/core1"
+          }
+        }
+      },
+      {
+        "id": "node0_core2",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000005",
+          "basename": "core",
+          "name": "core2",
+          "id": 2,
+          "uniq_id": 5,
+          "rank": 0,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-1/core2"
+          }
+        }
+      },
+      {
+        "id": "node0_core3",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000006",
+          "basename": "core",
+          "name": "core3",
+          "id": 3,
+          "uniq_id": 6,
+          "rank": 0,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-1/core3"
+          }
+        }
+      },
+      {
+        "id": "node1",
+        "metadata": {
+          "type": "node",
+          "uuid": "00000000-0000-0000-0000-000000000007",
+          "basename": "node",
+          "name": "replicas-node-2",
+          "id": 1,
+          "uniq_id": 7,
+          "rank": 1,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-2"
+          }
+        }
+      },
+      {
+        "id": "node1_core0",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000009",
+          "basename": "core",
+          "name": "core0",
+          "id": 0,
+          "uniq_id": 9,
+          "rank": 1,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-2/core0"
+          }
+        }
+      },
+      {
+        "id": "node1_core1",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-00000000000a",
+          "basename": "core",
+          "name": "core1",
+          "id": 1,
+          "uniq_id": 10,
+          "rank": 1,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-2/core1"
+          }
+        }
+      },
+      {
+        "id": "node1_core2",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-00000000000b",
+          "basename": "core",
+          "name": "core2",
+          "id": 2,
+          "uniq_id": 11,
+          "rank": 1,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-2/core2"
+          }
+        }
+      },
+      {
+        "id": "node1_core3",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-00000000000c",
+          "basename": "core",
+          "name": "core3",
+          "id": 3,
+          "uniq_id": 12,
+          "rank": 1,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-2/core3"
+          }
+        }
+      },
+      {
+        "id": "node2",
+        "metadata": {
+          "type": "node",
+          "uuid": "00000000-0000-0000-0000-00000000000d",
+          "basename": "node",
+          "name": "replicas-node-3",
+          "id": 2,
+          "uniq_id": 13,
+          "rank": 2,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-3"
+          }
+        }
+      },
+      {
+        "id": "node2_core0",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-00000000000f",
+          "basename": "core",
+          "name": "core0",
+          "id": 0,
+          "uniq_id": 15,
+          "rank": 2,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-3/core0"
+          }
+        }
+      },
+      {
+        "id": "node2_core1",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000010",
+          "basename": "core",
+          "name": "core1",
+          "id": 1,
+          "uniq_id": 16,
+          "rank": 2,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-3/core1"
+          }
+        }
+      },
+      {
+        "id": "node2_core2",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000011",
+          "basename": "core",
+          "name": "core2",
+          "id": 2,
+          "uniq_id": 17,
+          "rank": 2,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-3/core2"
+          }
+        }
+      },
+      {
+        "id": "node2_core3",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000012",
+          "basename": "core",
+          "name": "core3",
+          "id": 3,
+          "uniq_id": 18,
+          "rank": 2,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-3/core3"
+          }
+        }
+      },
+      {
+        "id": "node3",
+        "metadata": {
+          "type": "node",
+          "uuid": "00000000-0000-0000-0000-000000000013",
+          "basename": "node",
+          "name": "replicas-node-4",
+          "id": 3,
+          "uniq_id": 19,
+          "rank": 3,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-4"
+          }
+        }
+      },
+      {
+        "id": "node3_core0",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000015",
+          "basename": "core",
+          "name": "core0",
+          "id": 0,
+          "uniq_id": 21,
+          "rank": 3,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-4/core0"
+          }
+        }
+      },
+      {
+        "id": "node3_core1",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000016",
+          "basename": "core",
+          "name": "core1",
+          "id": 1,
+          "uniq_id": 22,
+          "rank": 3,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-4/core1"
+          }
+        }
+      },
+      {
+        "id": "node3_core2",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000017",
+          "basename": "core",
+          "name": "core2",
+          "id": 2,
+          "uniq_id": 23,
+          "rank": 3,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-4/core2"
+          }
+        }
+      },
+      {
+        "id": "node3_core3",
+        "metadata": {
+          "type": "core",
+          "uuid": "00000000-0000-0000-0000-000000000018",
+          "basename": "core",
+          "name": "core3",
+          "id": 3,
+          "uniq_id": 24,
+          "rank": 3,
+          "properties": {},
+          "size": 1,
+          "unit": "count",
+          "exclusive": false,
+          "paths": {
+            "containment": "/cluster0/replicas-node-4/core3"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "cluster0",
+        "target": "node0",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node0",
+        "target": "node0_core0",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node0",
+        "target": "node0_core1",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node0",
+        "target": "node0_core2",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node0",
+        "target": "node0_core3",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "cluster0",
+        "target": "node1",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node1",
+        "target": "node1_core0",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node1",
+        "target": "node1_core1",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node1",
+        "target": "node1_core2",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node1",
+        "target": "node1_core3",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "cluster0",
+        "target": "node2",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node2",
+        "target": "node2_core0",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node2",
+        "target": "node2_core1",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node2",
+        "target": "node2_core2",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node2",
+        "target": "node2_core3",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "cluster0",
+        "target": "node3",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node3",
+        "target": "node3_core0",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node3",
+        "target": "node3_core1",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node3",
+        "target": "node3_core2",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      },
+      {
+        "source": "node3",
+        "target": "node3_core3",
+        "metadata": {
+          "subsystem": "containment",
+          "relationship": "contains"
+        }
+      }
+    ]
+  }
+}

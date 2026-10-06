@@ -1,6 +1,7 @@
 ARG flux_sched_version=jammy
 FROM fluxrm/flux-sched:${flux_sched_version} AS builder
 ARG replicas=3
+ARG build_jobs=6
 ENV workers=${replicas}
 USER root
 
@@ -10,6 +11,8 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install \
     autoconf \
     automake \
     cmake \
+    gcc-12 \
+    g++-12 \
     git \
     python3 \
     python3-pip \
@@ -20,6 +23,40 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install \
     dnsutils \
     iputils-ping \
     software-properties-common
+
+# Import the local Flux forks supplied through the named build contexts in
+# docker-compose.yml. Docker copies the source trees into the image; it does
+# not modify the repositories on the host.
+COPY --from=custom_flux_core / /src/flux-core/
+
+# Install the custom Flux Core over the base image's installation. Using the
+# same /usr prefix avoids mixing an original /usr installation with a custom
+# /usr/local installation.
+RUN cd /src/flux-core && \
+    ./autogen.sh && \
+    ./configure \
+        --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var && \
+    make -j"${build_jobs}" && \
+    make install && \
+    ldconfig
+
+COPY --from=custom_flux_sched / /src/flux-sched/
+
+# Build Fluxion only after the custom Core is installed, ensuring that the
+# custom scheduler is compiled against the custom Core in this image.
+RUN cmake \
+        -S /src/flux-sched \
+        -B /tmp/flux-sched-build \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DFLUX_SCHED_VER=0.55.0 \
+        -DCMAKE_C_COMPILER=/usr/bin/gcc-12 \
+        -DCMAKE_CXX_COMPILER=/usr/bin/g++-12 && \
+    cmake --build /tmp/flux-sched-build --parallel "${build_jobs}" && \
+    cmake --install /tmp/flux-sched-build && \
+    ldconfig
 
 # These are the STATE_DIR, system, and resources directories
 ENV STATE_DIR=/var/lib/flux
@@ -39,4 +76,9 @@ RUN pip3 install --upgrade pip && \
 USER fluxuser
 WORKDIR /home/fluxuser/
 COPY ./scripts/entrypoint.sh ./scripts/job.py ./
+COPY --chown=fluxuser:fluxuser \
+    ./cosched_config/config.toml \
+    ./cosched_config/simple-socket.jgf \
+    ./cosched_config/cluster.jgf \
+    ./
 ENTRYPOINT /bin/bash /home/fluxuser/entrypoint.sh

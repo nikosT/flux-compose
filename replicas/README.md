@@ -14,6 +14,14 @@ and provide a [scripts/job.py](scripts/job.py) to submit to Flux that mostly doe
  
 ## Usage
 
+### 0. Configure env
+
+Change the `.env` file with the correct local paths. Verify that the environmental variables are okay with:
+
+```bash
+docker compose config
+```
+
 ### 1. Build
 
 You can first build the image (used for workers and broker):

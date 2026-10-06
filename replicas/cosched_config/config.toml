@@ -1,0 +1,13 @@
+[coscheduling-cpu]
+allowed = true
+resource_type = "node"
+n_way = 4
+waste_threshold = 0.0
+
+[resource]
+scheduling = "/home/fluxuser/cluster.jgf"
+noverify = true
+
+[[resource.config]]
+hosts = "replicas-node-[1-4]"
+cores = "0-3"
